@@ -40,12 +40,32 @@ def leapDays(startYear,startMonth,endYear,endMonth):
     if endMonth<3:
         endYear -= 1
 
+def leapDays(startYear,startMonth,endYear,endMonth):
+    days = 0
+    
+    if startMonth>3:
+        startYear += 1
+    if endMonth<3:
+        endYear -= 1
+		
     while startYear<=endYear:
-        if startYear%4 == 0:
+        if isLeapYear(startYear):
             days += 1
         startYear+=1
 
-    return days	
+    return days
+
+def isLeapYear(year):
+    if(year%400==0):
+        return True
+    else:
+        if(year%100==0):
+            return False
+        else:
+            if(year%4==0):
+                return True
+            else:
+                return False
 	
 # Test routine
 
