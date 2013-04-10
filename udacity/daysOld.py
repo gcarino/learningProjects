@@ -68,7 +68,7 @@ def isLeapYear(year):
                 return False
 	
 # Test routine
-
+"""
 def test():
     test_cases = [((2012,1,1,2012,2,28), 58), 
                   ((2012,1,1,2012,3,1), 60),
@@ -83,3 +83,10 @@ def test():
             print "Test case passed!"
 
 test()
+"""
+
+print daysBetweenDates(2012,12,7,2012,12,7)
+print daysBetweenDates(2012,12,7,2012,12,8)
+print daysBetweenDates(2012,12,8,2012,12,7)
+print daysBetweenDates(2012,6,29,2013,6,29)
+print daysBetweenDates(2012,6,29,2013,6,31)
