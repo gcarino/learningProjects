@@ -34,14 +34,6 @@ def daysFromMonths(month):
 
 def leapDays(startYear,startMonth,endYear,endMonth):
     days = 0
-
-    if startMonth>3:
-        startYear += 1
-    if endMonth<3:
-        endYear -= 1
-
-def leapDays(startYear,startMonth,endYear,endMonth):
-    days = 0
     
     if startMonth>3:
         startYear += 1
