@@ -39,9 +39,19 @@ function Hand() {
 	
 	this.score = function(){
 		var sum = 0;
+		var aces = 0;
+		
 		for( var i=0 ; i<cards.length ; i++){
 			sum += cards[i].getValue();
+			if(cards[i].getValue() === 11)
+				aces++;
 		}
+		
+		while(aces>0 && sum>21){
+			aces--;
+			sum -= 10;
+		}
+		
 		return sum;
 	};
 	
@@ -76,6 +86,10 @@ function Hand() {
 		
 		return str;
 	};
+	
+	this.hitMe = function() {
+		cards.push(deal());
+	};
 }
 
 function deal(){
@@ -86,6 +100,58 @@ function deal(){
 	return card;
 }
 
-hands = new Hand();
-console.log(hands.printHand());
-console.log(hands.score());
+function playAsDealer(){
+	dealerHand = new Hand();
+	
+	if(dealerHand.score() < 17){
+		dealerHand.hitMe();
+	}
+	
+	return dealerHand;
+}
+
+function playAsUser(){
+	player = new Hand();
+	var decision;
+	do {
+		decision = confirm("Your hand:\n" + player.printHand() +
+			"Your score is: " + player.score() + 
+			"\nDo you want to hit?");
+		if(decision){
+			player.hitMe();
+		}
+	} while (decision);
+	
+	return player;
+}
+
+function declareWinner(userHand, dealerHand){
+	var userBust = userHand.score() > 21;
+	var dealerBust = dealerHand.score() > 21;
+	var userWin = (!userBust) &&
+		((userHand.score() > dealerHand.score()) ||
+		dealerBust);
+	 
+	if(userWin){
+		return "You win!";
+	} else if( userHand.score() === dealerHand.score() ||
+			(userBust && dealerBust)){
+		return "You tied!";
+	} else{
+		return "You lose!";
+	}
+}
+
+function playGame(){
+	var player = playAsUser();
+	var dealer = playAsDealer();
+	var win = declareWinner(player, dealer)
+	
+	console.log("Your hand:\n" + player.printHand());
+	console.log("Your score: "+ player.score() +"\n");
+	console.log("Dealer hand:\n" +dealer.printHand());
+	console.log("Dealer score: "+ dealer.score() + "\n");
+	console.log(win);
+}
+
+playGame();
