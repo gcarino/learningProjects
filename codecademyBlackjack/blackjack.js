@@ -26,6 +26,7 @@ function Card(a, b){
     };
 }
 
+//Hand constructor, initialized with 2 cards
 function Hand() {
 	var cards = [];
 	
@@ -34,6 +35,46 @@ function Hand() {
 	
 	this.getHand = function(){
 		return cards;
+	};
+	
+	this.score = function(){
+		var sum = 0;
+		for( var i=0 ; i<cards.length ; i++){
+			sum += cards[i].getValue();
+		}
+		return sum;
+	};
+	
+	this.printHand = function() {
+		var str = "";
+		var suit = "";
+		var face = "";
+		for(var i = 0; i<cards.length ;i++){
+			if(cards[i].getSuit() === 1){
+				suit = "Clubs";
+			} else if (cards[i].getSuit() === 2){
+				suit = "Diamonds";
+			} else if (cards[i].getSuit() === 3){
+				suit = "Hearts";
+			} else {
+				suit = "Spades";
+			}
+			
+			if(cards[i].getNumber() === 11) {
+				face = "Jack";
+			} else if(cards[i].getNumber() === 12) {
+				face = "Queen";
+			} else if(cards[i].getNumber() === 13) {
+				face = "King";
+			} else if(cards[i].getNumber() === 1) {
+				face = "Ace";
+			} else
+				face = cards[i].getNumber();
+				
+			str += face + " of " + suit + "\n";
+		}
+		
+		return str;
 	};
 }
 
@@ -44,3 +85,7 @@ function deal(){
 	var card = new Card(randSuit, randNum);
 	return card;
 }
+
+hands = new Hand();
+console.log(hands.printHand());
+console.log(hands.score());
