@@ -92,6 +92,7 @@ function Hand() {
 	};
 }
 
+//Returns a Card object of a random card
 function deal(){
 	var randSuit = Math.floor(Math.random()*4+1);
 	var randNum = Math.floor(Math.random()*13+1);
@@ -100,6 +101,7 @@ function deal(){
 	return card;
 }
 
+//Creates a dealer hand and follows dealer rules on hitting
 function playAsDealer(){
 	dealerHand = new Hand();
 	
@@ -110,6 +112,7 @@ function playAsDealer(){
 	return dealerHand;
 }
 
+//Gives the user the ability to play their hand
 function playAsUser(){
 	player = new Hand();
 	var decision;
@@ -125,6 +128,7 @@ function playAsUser(){
 	return player;
 }
 
+//Determines winner, and returns a string with result
 function declareWinner(userHand, dealerHand){
 	var userBust = userHand.score() > 21;
 	var dealerBust = dealerHand.score() > 21;
@@ -142,6 +146,7 @@ function declareWinner(userHand, dealerHand){
 	}
 }
 
+//Function that controls the game
 function playGame(){
 	var player = playAsUser();
 	var dealer = playAsDealer();
